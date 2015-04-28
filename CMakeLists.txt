@@ -4,6 +4,7 @@ project(ansh)
 
 SET(CMAKE_C_FLAGS_INIT "-Wall -Wextra -Werror -pedantic -std=c11")
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
+SET(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 include_directories("include/")
 include_directories("mpc/")
