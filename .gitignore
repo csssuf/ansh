@@ -39,4 +39,4 @@ cmake_install.cmake
 compile_commands.json
 
 # Output
-bin/*
+build/
