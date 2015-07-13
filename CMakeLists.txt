@@ -22,4 +22,4 @@ add_library(Octothorpe STATIC Octothorpe/src/octo/hash.c
 target_include_directories(Octothorpe SYSTEM PUBLIC "Octothorpe/include")
 
 add_executable(ansh src/ansh.c mpc/mpc.c)
-target_link_libraries(ansh m)
+target_link_libraries(ansh m Octothorpe)
