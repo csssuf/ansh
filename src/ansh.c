@@ -14,7 +14,15 @@
 int main(int argc, char* argv[]) {
     if(argc == 1 || argv == NULL) {}
     octo_dict_cll_t *env_vars = setup();
-    fprintf(stderr, "PROMPT: %s", (char *)(fetch_value("PROMPT", env_vars)));
+    char *readBuffer;
+    while(1) {
+        readBuffer = readline((char *)(fetch_value("PROMPT", env_vars)));
+        if(readBuffer == NULL) {
+            break;
+        }
+        add_history(readBuffer);
+        printf("%s\n", readBuffer);
+    }
     octo_cll_free(env_vars);
     return EXIT_SUCCESS;
 }
