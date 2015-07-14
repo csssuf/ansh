@@ -14,11 +14,7 @@
 int main(int argc, char* argv[]) {
     if(argc == 1 || argv == NULL) {}
     octo_dict_cll_t *env_vars = setup();
-    hashable_str *key_prompt = malloc(sizeof(hashable_str));
-    memset(key_prompt, 0, sizeof(hashable_str));
-    strcpy(key_prompt->str, "PROMPT");
-    fprintf(stderr, "PROMPT: %s", (char *)(octo_cll_fetch(key_prompt, env_vars)));
-    free(key_prompt);
+    fprintf(stderr, "PROMPT: %s", (char *)(fetch_value("PROMPT", env_vars)));
     octo_cll_free(env_vars);
     return EXIT_SUCCESS;
 }
