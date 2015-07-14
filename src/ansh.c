@@ -9,6 +9,7 @@
 
 #include "mpc.h"
 #include "ansh/ansh.h"
+#include "ansh/util.h"
 
 int main(int argc, char* argv[]) {
     if(argc == 1 || argv == NULL) {}
@@ -17,6 +18,8 @@ int main(int argc, char* argv[]) {
     memset(key_prompt, 0, sizeof(hashable_str));
     strcpy(key_prompt->str, "PROMPT");
     fprintf(stderr, "PROMPT: %s", (char *)(octo_cll_fetch(key_prompt, env_vars)));
+    free(key_prompt);
+    octo_cll_free(env_vars);
     return EXIT_SUCCESS;
 }
 
@@ -29,15 +32,13 @@ octo_dict_cll_t *setup() {
         master_key
     );
 
-    hashable_str *key_prompt = malloc(sizeof(hashable_str));
-    memset(key_prompt, 0, sizeof(hashable_str));
-    strcpy(key_prompt->str, "PROMPT");
-    hashable_str *val_prompt = malloc(sizeof(hashable_str));
-    memset(val_prompt, 0, sizeof(hashable_str));
-    strcpy(val_prompt->str, "ansh $ ");
-    if(octo_cll_insert(key_prompt, val_prompt, vars) != 0) {
+    if(insert_kv_pair("PROMPT", "ansh $ ", vars) != 0) {
         fprintf(stderr, "Error adding PROMPT variable during setup()\n");
         return NULL;
+    }
+
+    if(insert_kv_pair("PATH", "/bin:/usr/bin", vars) != 0) {
+        fprintf(stderr, "Error adding PATH variable during setup()\n");
     }
     return vars;
 }
