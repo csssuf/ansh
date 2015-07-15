@@ -21,5 +21,6 @@ add_library(Octothorpe STATIC Octothorpe/src/octo/hash.c
     Octothorpe/src/octo/keygen.c Octothorpe/src/octo/loa.c)
 target_include_directories(Octothorpe SYSTEM PUBLIC "Octothorpe/include")
 
-add_executable(ansh src/ansh.c src/util.c src/parse.c mpc/mpc.c)
+FILE(GLOB anshsources src/*.c)
+add_executable(ansh ${anshsources} mpc/mpc.c)
 target_link_libraries(ansh m Octothorpe readline)
