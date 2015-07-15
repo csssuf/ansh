@@ -16,15 +16,23 @@ int main(int argc, char* argv[]) {
     if(argc == 1 || argv == NULL) {}
     setup_parser();
     octo_dict_cll_t *env_vars = setup();
-    char *readBuffer;
+    char *read_buffer;
+    mpc_result_t parse_result;
     while(1) {
-        readBuffer = readline((char *)(fetch_value("PROMPT", env_vars)));
-        if(readBuffer == NULL) {
+        read_buffer = readline((char *)(fetch_value("PROMPT", env_vars)));
+        if(read_buffer == NULL) {
             break;
         }
-        add_history(readBuffer);
-        printf("%s\n", readBuffer);
+        add_history(read_buffer);
+        if(mpc_parse("input", read_buffer, parser_command, &parse_result)) {
+            mpc_ast_print(parse_result.output);
+            mpc_ast_delete(parse_result.output);
+        } else {
+            mpc_err_print(parse_result.error);
+            mpc_err_delete(parse_result.error);
+        }
     }
+    free_parser();
     octo_cll_free(env_vars);
     return EXIT_SUCCESS;
 }
