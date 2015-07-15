@@ -9,10 +9,12 @@
 
 #include "mpc.h"
 #include "ansh/ansh.h"
+#include "ansh/parse.h"
 #include "ansh/util.h"
 
 int main(int argc, char* argv[]) {
     if(argc == 1 || argv == NULL) {}
+    setup_parser();
     octo_dict_cll_t *env_vars = setup();
     char *readBuffer;
     while(1) {
