@@ -9,6 +9,7 @@
 
 #include "mpc.h"
 #include "ansh/ansh.h"
+#include "ansh/builtins.h"
 #include "ansh/parse.h"
 #include "ansh/util.h"
 
@@ -25,8 +26,9 @@ int main(int argc, char* argv[]) {
         }
         add_history(read_buffer);
         if(mpc_parse("input", read_buffer, parser_command, &parse_result)) {
-            mpc_ast_print(parse_result.output);
-            mpc_ast_delete(parse_result.output);
+            if(is_builtin(parse_result.output)) {
+                run_builtin(parse_result.output);
+            }
         } else {
             mpc_err_print(parse_result.error);
             mpc_err_delete(parse_result.error);

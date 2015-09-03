@@ -14,3 +14,4 @@ typedef struct hashable_str_s {
 octo_dict_cll_t *setup();
 
 #endif //ANSH_ANSH_H
+
