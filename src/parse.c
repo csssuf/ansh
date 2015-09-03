@@ -24,3 +24,4 @@ void free_parser() {
     mpc_cleanup(6, parser_word, parser_number, parser_builtin, parser_variable,
                 parser_expression, parser_command);
 }
+

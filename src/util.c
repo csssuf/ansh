@@ -21,3 +21,4 @@ void *fetch_value(const char *const key, octo_dict_cll_t *dict) {
     free(hashable_key);
     return value;
 }
+
