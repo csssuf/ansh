@@ -44,7 +44,7 @@ int run_builtin(mpc_ast_t *cmd_ast) {
         hashable_str *h_key = malloc(sizeof(hashable_str));
         memset(h_key, 0, sizeof(hashable_str));
         strcpy(h_key->str, builtin_expr->contents);
-        ((int (*)(mpc_ast_t *, ...))octo_cll_fetch(h_key, builtins)) (cmd_ast);
+        ((hashable_builtin*)octo_cll_fetch(h_key, builtins))->func(cmd_ast);
     } else {
         fprintf(stderr, "builtin: %s\n", expr_tree->contents);
     }

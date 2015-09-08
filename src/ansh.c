@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
     octo_dict_cll_t *env_vars = setup();
     char *read_buffer;
     mpc_result_t parse_result;
+
+    build_builtins();
+
     while(1) {
         read_buffer = readline((char *)(fetch_value("PROMPT", env_vars)));
         if(read_buffer == NULL) {
